@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="348" viewBox="0 0 860 348" role="img" aria-labelledby="title desc">
+  <title id="title">Context usage colors across different percentages</title>
+  <desc id="desc">Five examples show the context usage indicator gradually changing from green at low usage, through olive and orange, to red at high usage.</desc>
+  <rect width="860" height="348" rx="16" fill="#1f1f1f"/>
+  <g font-family="monospace" font-size="25">
+    <g fill="#888888">
+      <text x="32" y="64">Context usage:</text>
+      <text x="32" y="120">Context usage:</text>
+      <text x="32" y="176">Context usage:</text>
+      <text x="32" y="232">Context usage:</text>
+      <text x="32" y="288">Context usage:</text>
+    </g>
+    <g font-weight="bold">
+      <text x="263" y="64" fill="#4dbd4f">9%</text>
+      <text x="263" y="120" fill="#a1ae2d">30%</text>
+      <text x="263" y="176" fill="#f59e0b">50%</text>
+      <text x="263" y="232" fill="#f38e53">65%</text>
+      <text x="263" y="288" fill="#f15e41">90%</text>
+    </g>
+    <g font-size="24" font-weight="bold">
+      <text x="335" y="64" fill="#4dbd4f">▰<tspan fill="none" stroke="#4dbd4f">▱▱▱▱▱▱▱▱▱</tspan></text>
+      <text x="335" y="120" fill="#a1ae2d">▰▰▰<tspan fill="none" stroke="#a1ae2d">▱▱▱▱▱▱▱</tspan></text>
+      <text x="335" y="176" fill="#f59e0b">▰▰▰▰▰<tspan fill="none" stroke="#f59e0b">▱▱▱▱▱</tspan></text>
+      <text x="335" y="232" fill="#f38e53">▰▰▰▰▰▰▰<tspan fill="none" stroke="#f38e53">▱▱▱</tspan></text>
+      <text x="335" y="288" fill="#f15e41">▰▰▰▰▰▰▰▰▰<tspan fill="none" stroke="#f15e41">▱</tspan></text>
+    </g>
+    <g fill="#888888">
+      <text x="594" y="64">(91k/1000k)</text>
+      <text x="594" y="120">(300k/1000k)</text>
+      <text x="594" y="176">(500k/1000k)</text>
+      <text x="594" y="232">(650k/1000k)</text>
+      <text x="594" y="288">(900k/1000k)</text>
+    </g>
+  </g>
+</svg>
