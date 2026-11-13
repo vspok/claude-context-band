@@ -3,6 +3,55 @@ import type { EngineInterface, Register } from 'claude-code';
 
 import type { Ctx } from '../types';
 
+const clamp = (value: number, min: number, max: number) =>
+  Math.min(Math.max(value, min), max);
+
+const hexToRgb = (hex: string) => {
+  const normalized = hex.replace('#', '');
+  const value = normalized.length === 3
+    ? normalized
+        .split('')
+        .map((char) => char + char)
+        .join('')
+    : normalized;
+
+  const number = Number.parseInt(value, 16);
+  return {
+    r: (number >> 16) & 255,
+    g: (number >> 8) & 255,
+    b: number & 255,
+  };
+};
+
+const rgbToHex = ({ r, g, b }: { r: number; g: number; b: number }) =>
+  `#${[r, g, b]
+    .map((channel) => clamp(Math.round(channel), 0, 255).toString(16).padStart(2, '0'))
+    .join('')}`;
+
+const lerp = (start: number, end: number, amount: number) =>
+  start + (end - start) * amount;
+
+const mixHex = (from: string, to: string, amount: number) => {
+  const start = hexToRgb(from);
+  const end = hexToRgb(to);
+
+  return rgbToHex({
+    r: lerp(start.r, end.r, amount),
+    g: lerp(start.g, end.g, amount),
+    b: lerp(start.b, end.b, amount),
+  });
+};
+
+const colorForPercent = (pct: number) => {
+  const clamped = clamp(pct, 0, 100);
+
+  if (clamped <= 50) {
+    return mixHex('#22c55e', '#f59e0b', clamped / 50);
+  }
+
+  return mixHex('#f59e0b', '#ef4444', (clamped - 50) / 50);
+};
+
 const bar = (pct: number) => {
   const filled = Math.min(10, Math.max(0, Math.round(pct / 10)));
   return '▰'.repeat(filled) + '▱'.repeat(10 - filled);
@@ -42,7 +91,7 @@ export const register: Register = (on) => {
 
     const { Box, Text } = $.ui.resolve(e);
     const pct = Math.round(c.percent);
-    const color = pct >= 85 ? 'red' : pct >= 60 ? 'yellow' : 'green';
+    const color = colorForPercent(pct);
     const k = (n?: number) =>
       n === undefined ? '?' : `${Math.round(n / 1000)}k`;
 
